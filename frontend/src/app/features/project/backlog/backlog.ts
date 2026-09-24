@@ -1,10 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 import { IProject, ITask } from '../../../core/models';
 
 @Component({
   selector: 'app-backlog',
-  imports: [],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './backlog.html'
 })
 export class Backlog {
