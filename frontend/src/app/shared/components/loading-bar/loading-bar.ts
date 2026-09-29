@@ -1,14 +1,39 @@
-import { Component, OnDestroy, signal } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import {
+  NavigationCancel,
+  NavigationEnd,
+  NavigationError,
+  NavigationStart,
+  Router,
+} from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-loading-bar',
   templateUrl: './loading-bar.html',
-  styleUrls: ['./loading-bar.scss']
+  styleUrls: ['./loading-bar.scss'],
 })
-export class LoadingBar implements OnDestroy {
-  isLoading = signal(false);
+export class LoadingBar implements OnInit, OnDestroy {
+  private readonly _router = inject(Router);
+
+  isLoading = signal(true);
+  routerSub!: Subscription;
+
+  ngOnInit() {
+    this.routerSub = this._router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        this.isLoading.set(true);
+      } else if (
+        event instanceof NavigationEnd ||
+        event instanceof NavigationCancel ||
+        event instanceof NavigationError
+      ) {
+        this.isLoading.set(false);
+      }
+    });
+  }
 
   ngOnDestroy(): void {
-
+    this.routerSub?.unsubscribe();
   }
 }
