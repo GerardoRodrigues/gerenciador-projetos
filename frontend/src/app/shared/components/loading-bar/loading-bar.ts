@@ -28,7 +28,7 @@ export class LoadingBar implements OnInit, OnDestroy {
         event instanceof NavigationCancel ||
         event instanceof NavigationError
       ) {
-        this.isLoading.set(false);
+        setTimeout(() => this.isLoading.set(false), 300);
       }
     });
   }
