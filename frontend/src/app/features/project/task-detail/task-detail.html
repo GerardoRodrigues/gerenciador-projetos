@@ -27,6 +27,7 @@
           >Título da Tarefa</label
         >
         <input
+          data-testid="task-title-input"
           type="text"
           [(ngModel)]="taskToEdit.title"
           name="title"
@@ -78,6 +79,7 @@
       }
       <div class="flex items-center gap-3">
         <button
+          data-testid="close-modal-btn"
           type="button"
           class="px-4 py-2.5 rounded-xl border border-white/10 text-slate-300 hover:bg-white/5 text-sm font-medium transition-all cursor-pointer"
           (click)="close()"
@@ -85,6 +87,7 @@
           Cancelar
         </button>
         <button
+          data-testid="save-task-btn"
           type="button"
           class="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-bold py-2.5 px-6 rounded-xl shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-all cursor-pointer"
           (click)="save()"
